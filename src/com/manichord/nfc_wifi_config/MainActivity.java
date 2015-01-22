@@ -9,6 +9,7 @@ import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
     private static final String LOGTAG = "NFCWifiConfig";
@@ -41,12 +42,18 @@ public class MainActivity extends Activity {
             }
         }
         if (wifiConf != null) {
-            Log.d(LOGTAG, "Got SSID:" + wifiConf.SSID);
-            Log.d(LOGTAG, "Got SSID:" + wifiConf.preSharedKey);
+            String mesg = String.format("Got SSID:%s \nKey:%s", wifiConf.SSID, wifiConf.preSharedKey);
+            Log.d(LOGTAG, mesg);
             addWifiConfig(wifiConf);
+            Toast.makeText(this.getApplicationContext(), mesg, Toast.LENGTH_LONG).show();
+            this.finish();
         }
     }
 
+    /**
+     * Add Wifi Configuration, ensuring also that Wifi is turned on
+     * @param wifiConf
+     */
     private void addWifiConfig(WifiConfiguration wifiConf) {
         WifiManager wifi = (WifiManager) this.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         wifi.setWifiEnabled(true);
@@ -58,6 +65,12 @@ public class MainActivity extends Activity {
         Log.i(LOGTAG, "enableNetwork returned: " + enabled);
     }
 
+    /**
+     * Manually create a Wifi Configuration
+     * @param password
+     * @param networkSSID
+     * @return
+     */
     private WifiConfiguration mkWPAConfig(String password, String networkSSID) {
         WifiConfiguration conf = new WifiConfiguration();
         conf.SSID = "\"" + networkSSID + "\"";
