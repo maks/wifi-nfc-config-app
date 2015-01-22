@@ -4,7 +4,7 @@ A "back-port" to Android 4.4 of the functionality from 5.0 to use a NFC tag to a
 
 ## Usage
 
-Standard (**not** Mifare) Nfc 1k tags can be used.
+Standard (**not** Mifare) NFC Forum Type2 ISO14443A tags (eg. NXP NTAG203) can be used.
 
 The Wifi Configuration data can be written to Tags using either the [NXP TagWriter app](https://play.google.com/store/apps/details?id=com.nxp.nfc.tagwriter) or from the Android 5.0 Wifi settings by long-pressing on Wifi network in the list of saved Wifi SSIDs **with** stored Credentials.
 
@@ -23,7 +23,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-     http://www.apache.org/licenses/LICENSE-2.0
+http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
