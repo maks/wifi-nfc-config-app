@@ -1,5 +1,7 @@
 # Android App to configure Wifi via NFC
 
+![Logo](http://upload.wikimedia.org/wikipedia/en/thumb/c/c3/NFC-N-Mark-Logo.png/170px-NFC-N-Mark-Logo.png)
+
 A "back-port" to Android 4.4 of the functionality from 5.0 to use a NFC tag to add/modify credentials for a Wifi SSID to an android device.
 
 ## Usage
