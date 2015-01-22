@@ -1,3 +1,19 @@
+/*
+* Copyright (C) 2014 The Android Open Source Project
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*      http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
+
 package com.manichord.nfc_wifi_config;
 
 import java.util.Arrays;
@@ -14,7 +30,7 @@ import android.nfc.NdefRecord;
 public class NfcUtils {
 
     public static final String NFC_TOKEN_MIME_TYPE = "application/vnd.wfa.wsc";
-    
+
     /*
      * ID into configuration record for SSID and Network Key in hex.
      * Obtained from WFA Wifi Simple Configuration Technical Specification v2.0.2.1.
@@ -25,7 +41,7 @@ public class NfcUtils {
     private static final int MAX_SSID_SIZE_BYTES = 32;
     private static final int MAX_NETWORK_KEY_SIZE_BYTES = 64;
     private static final int HEX_CHARS_PER_BYTE = 2;
-    
+
     public static WifiConfiguration parse(NdefMessage message) {
         NdefRecord[] records = message.getRecords();
         for (int i = 0; i < records.length; ++i) {
@@ -83,7 +99,7 @@ public class NfcUtils {
         }
         return null;
     }
-    
+
     private static int hexStringToInt(String bigEndianHexString) {
         int val = 0;
         for (int i = 0; i < bigEndianHexString.length(); ++i) {
