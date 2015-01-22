@@ -57,11 +57,12 @@ public class MainActivity extends Activity {
     private void addWifiConfig(WifiConfiguration wifiConf) {
         WifiManager wifi = (WifiManager) this.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         wifi.setWifiEnabled(true);
-        wifi.saveConfiguration();
-
         int added = wifi.addNetwork(wifiConf);
         Log.i(LOGTAG, "added network: " + added);
         boolean enabled = wifi.enableNetwork(added, true);
+        if (!wifi.saveConfiguration()) {
+            Log.e(LOGTAG, "error with wpa supplicant persisting Wifi config");
+        }
         Log.i(LOGTAG, "enableNetwork returned: " + enabled);
     }
 
