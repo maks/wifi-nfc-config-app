@@ -98,7 +98,9 @@ public class MainActivity extends Activity {
      */
     private void removeExistingSSID(String ssid, WifiManager wifiManager) {
         List<WifiConfiguration> list = wifiManager.getConfiguredNetworks();
-        
+        if (list == null) {
+            return;
+        }
         for(WifiConfiguration k : list)
         {
             if(k.SSID.equals(ssid))
