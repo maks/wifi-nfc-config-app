@@ -2,13 +2,17 @@
 
 ![Logo](http://upload.wikimedia.org/wikipedia/en/thumb/c/c3/NFC-N-Mark-Logo.png/170px-NFC-N-Mark-Logo.png)
 
-A "back-port" to Android 4.4 of the functionality from 5.0 to use a NFC tag to add/modify credentials for a Wifi SSID to an android device.
+A "back-port" to Android 4.4 of the functionality from 5.0 to use a NFC tag to add/modify credentials for a 
+Wifi SSID to an android device.
 
 ## Usage
 
 Standard (**not** Mifare) NFC Forum Type2 ISO14443A tags (eg. NXP NTAG203) can be used.
 
-The Wifi Configuration data can be written to Tags using either the [NXP TagWriter app](https://play.google.com/store/apps/details?id=com.nxp.nfc.tagwriter) or from the Android 5.0 Wifi settings by long-pressing on Wifi network in the list of saved Wifi SSIDs **with** stored Credentials.
+The Wifi Configuration data can be written to Tags using either the 
+[NXP TagWriter app](https://play.google.com/store/apps/details?id=com.nxp.nfc.tagwriter) 
+or from the Android 5.0 Wifi settings by long-pressing on a Wifi network in device Settings 
+list of Wifi SSIDs **with** stored Credentials.
 
 Only using the NXP TagWriter app has currently been tested.
 

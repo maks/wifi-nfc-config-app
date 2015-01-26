@@ -1,5 +1,8 @@
 package com.manichord.nfc_wifi_config;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.app.Activity;
 import android.content.Context;
 import android.net.wifi.WifiConfiguration;
@@ -57,8 +60,9 @@ public class MainActivity extends Activity {
     private void addWifiConfig(WifiConfiguration wifiConf) {
         WifiManager wifi = (WifiManager) this.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         wifi.setWifiEnabled(true);
+        removeExistingSSID(wifiConf.SSID, wifi);//clear out any existing config for same SSID
         int added = wifi.addNetwork(wifiConf);
-        Log.i(LOGTAG, "added network: " + added);
+        Log.i(LOGTAG, "added network ID: " + added);
         boolean enabled = wifi.enableNetwork(added, true);
         if (!wifi.saveConfiguration()) {
             Log.e(LOGTAG, "error with wpa supplicant persisting Wifi config");
@@ -84,5 +88,33 @@ public class MainActivity extends Activity {
         conf.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.CCMP);
         conf.allowedProtocols.set(WifiConfiguration.Protocol.RSN);
         return conf;
+    }
+    
+    /**
+     * Remove Network which matches the given SSID
+     * based on: http://stackoverflow.com/questions/22670299/android-remove-network-with-certain-ssids
+     * @param ssid
+     * @param wifiManager
+     */
+    private void removeExistingSSID(String ssid, WifiManager wifiManager) {
+        List<WifiConfiguration> list = wifiManager.getConfiguredNetworks();
+        
+        for(WifiConfiguration k : list)
+        {
+            if(k.SSID.equals(ssid))
+            {
+                int networkId = wifiManager.getConnectionInfo().getNetworkId();
+                if (!wifiManager.removeNetwork(networkId)) {
+                    Log.e(LOGTAG, "["+networkId+"] Error trying to remove existing network config SSID:"+ssid);
+                } else {
+                    Log.d(LOGTAG, "["+networkId+"] removed existing network config SSID:"+ssid);
+                }
+                if (!wifiManager.saveConfiguration()) {
+                    Log.e(LOGTAG, "error with wpa supplicant persisting Wifi config after removal");
+                } else {
+                    Log.d(LOGTAG, "wpa supplicant persisted Wifi config after removal");
+                }
+            }
+        }
     }
 }
